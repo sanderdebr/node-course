@@ -1,12 +1,19 @@
 const geocode = require("./utils/geocode");
 const forecast = require("./utils/forecast");
 
-geocode("Breda", (error, data) => {
-  console.log("Error: ", error);
-  console.log("Data", data);
-});
+geocode(process.argv[2], (error, { latitude, longitude, location } = {}) => {
+  if (error) {
+    console.log(error);
+    return;
+  }
 
-forecast(-75.7088, 44.1545, (error, data) => {
-  console.log("Error", error);
-  console.log("Data", data);
+  forecast(latitude, longitude, (error, forecastData) => {
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    console.log(location);
+    console.log(forecastData);
+  });
 });
