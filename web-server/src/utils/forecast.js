@@ -10,12 +10,11 @@ const forecast = (long, lat, callback) => {
       callback("Wrong coordinates provided.");
     } else {
       const { current } = body;
-      callback(
-        undefined,
-        `It is currently ${current.temperature} fahrenheit out. There is a ${
-          current.precip * 100
-        }% change of rain.`
-      );
+      const string1 = `It is currently ${
+        current.temperature
+      } fahrenheit out. There is a ${current.precip * 100}% change of rain.`;
+      const string2 = ` and the wind speed is ${current.wind_speed}`;
+      callback(undefined, string1 + string2);
     }
   });
 };
